@@ -35,3 +35,14 @@ This script will:
 2. Remove server devDependencies
 3. Setup client dependencies
 4. Build the client
+
+## Troubleshooting
+### Eslint Causing Build Failure On Heroku
+Occasionally, the client eslint settings will cause a build failure on Heroku. If this happens, it may be necessary to disable eslint by setting a Config Var in your Heroku dashboard. This won't impact any pre-build CI testing you are running (on, for example, on CircleCI). To disable eslint on Heroku:
+1. Choose your app from the Heroku dashboard
+2. Select "Settings" from the app menu
+3. Scroll down to the "Config Vars" section
+4. Add ```DISABLE_ESLINT_PLUGIN``` as the KEY and set its VALUE to ```true```
+5. Click the "Add" button to the right of the fields
+
+The app should now build successfully
