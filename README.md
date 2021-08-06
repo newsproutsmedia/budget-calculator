@@ -1,4 +1,7 @@
-# React App With Express Backend Starter
+# Budget Calculator
+Setting realistic expectations around budget is an important part of any home improvement design process. This budget calculator can help clients understand the cost of building and installing individual elements in their designs.
+
+## Built On React App With Express Backend Starter
 A starter template for creating React applications with a Node/Express backend. Includes frontend and backend tests, as well as Winston/Morgan logging of API routes and errors, and CircleCI config, and Heroku deployment. Client built with create-react-app.
 
 ## Installation
