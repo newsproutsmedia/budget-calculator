@@ -28,28 +28,3 @@ describe('GET /budget-calculator', () => {
       .end(done);
   });
 });
-
-describe('GET /api/test', () => {
-  it('should respond with 200 status', (done) => {
-    request(app)
-      .get('/api/test')
-      .expect(200)
-      .end(done);
-  });
-});
-
-describe('POST /api/message', () => {
-  it('should respond with 200 status and return json', (done) => {
-    const testMessage = { message: 'test' };
-    request(app)
-      .post('/api/message')
-      .send(testMessage)
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(200)
-      .end((err, res) => {
-        if (err) return done(err);
-        return done();
-      });
-  });
-});
