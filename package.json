@@ -27,5 +27,8 @@
         "react-with-express"
     ],
     "author": "NB Walters",
-    "license": "ISC"
+    "license": "ISC",
+    "dependencies": {
+        "react-router-dom": "^5.2.0"
+    }
 }
