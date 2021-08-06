@@ -11,27 +11,20 @@ describe('GET /', () => {
   });
 });
 
-describe('GET /api/test', () => {
-  it('should respond with 200 status', (done) => {
+describe('GET /budget-calculator', () => {
+  it('should respond with 200 status to /budget-calculator endpoint and serve HTML', (done) => {
     request(app)
-      .get('/api/test')
+      .get('/budget-calculator')
+      .expect('Content-Type', 'text/html; charset=UTF-8')
       .expect(200)
       .end(done);
   });
-});
 
-describe('POST /api/message', () => {
-  it('should respond with 200 status and return json', (done) => {
-    const testMessage = { message: 'test' };
+  it('should respond with 200 status to /budget-calculator/* endpoints and serve HTML', (done) => {
     request(app)
-      .post('/api/message')
-      .send(testMessage)
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
+      .get('/budget-calculator/app')
+      .expect('Content-Type', 'text/html; charset=UTF-8')
       .expect(200)
-      .end((err, res) => {
-        if (err) return done(err);
-        return done();
-      });
+      .end(done);
   });
 });
