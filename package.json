@@ -4,24 +4,28 @@
     "description": "Template for React app with Express backend",
     "main": "server/server.js",
     "engines": {
-      "node": "16.2.x"
+        "node": "16.2.x"
     },
     "scripts": {
-      "start": "node server/server.js",
-      "server": "cd server && npm run server",
-      "setup:server": "cd server && npm install",
-      "test:server": "cd server && npm run test",
-      "prune:server": "cd server && npm prune",
-      "client": "cd client && npm run start",
-      "setup:client": "cd client && npm install",
-      "setup:client-dev": "cd client && npm install --only-dev --no-shrinkwrap",
-      "build:client": "cd client && npm run build",
-      "startboth": "npm run server & npm run client",
-      "test:client": "cd client && npm run test",
-      "heroku-postbuild": "npm run setup:server && npm run prune:server && npm run setup:client && npm run build:client"
+        "start": "node server/server.js",
+        "server": "cd server && npm run server",
+        "setup:server": "cd server && npm install",
+        "test:server": "cd server && npm run test",
+        "prune:server": "cd server && npm prune",
+        "client": "cd client && npm run start",
+        "setup:client": "cd client && npm install",
+        "setup:client-dev": "cd client && npm install --only-dev --no-shrinkwrap",
+        "build:client": "cd client && npm run build",
+        "startboth": "npm run server & npm run client",
+        "test:client": "cd client && npm run test",
+        "heroku-postbuild": "npm run setup:server && npm run prune:server && npm run setup:client && npm run build:client"
     },
-    "keywords": ["node", "express", "react", "react-with-express"],
+    "keywords": [
+        "node",
+        "express",
+        "react",
+        "react-with-express"
+    ],
     "author": "NB Walters",
     "license": "ISC"
-  }
-  
+}
