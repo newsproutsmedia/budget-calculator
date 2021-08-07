@@ -22,7 +22,8 @@
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "object-curly-newline": ["error", { "consistent": true }],
-        "no-trailing-spaces": [0],
-        "padded-blocks": [0]
+        "no-trailing-spaces": "off",
+        "padded-blocks": "off",
+        "jsx-one-expression-per-line": "off"
     }
 }
