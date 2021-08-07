@@ -13,9 +13,21 @@
 }
 
 .heading {
-  font-family: 'Domine', serif;
+  font-family: 'Domaine Display Narrow Regular', serif;
   font-size: 2.5rem;
   font-weight: 200;
+  padding-bottom: 16px;
+  margin: 0px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.text {
+  font-family: "Apercu", "Inter", "Helvetica", "Arial", sans-serif;
+  color: #4c4c4c;
+  font-weight: 400;
+  font-size: 0.9rem;
+  padding: 0px;
+  margin: 0px;
 }
 
 .formContainer {
@@ -34,12 +46,12 @@
 }
 
 .input {
-  font-family: "Apercu", "Inter", "Helvetica", "Arial", sans-serif;
+  font-family: ""Apercu", "Inter", ""Helvetica", "Arial", sans-serif;
   font: inherit;
   font-size: 13px;
   color: #333333;
-  border-color: rgba(0, 0, 0, 0.23);
   border: 1px solid;
+  border-color: rgba(59, 59, 59, 0.23);
   border-radius: 4px;
   width: 100%;
   height: 1.1876em;
@@ -52,6 +64,9 @@
 }
 
 .button {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 400;
+  font-size: 0.9rem;
   color: rgba(0, 0, 0, 0.87);
   background-color: #BFCCBF;
   text-transform: uppercase;

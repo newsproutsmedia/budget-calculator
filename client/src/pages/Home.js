@@ -16,6 +16,7 @@ function Home() {
   return (
     <div id="home" className={styles.home}>
       <h1 className={styles.heading} data-testid="budgetHeading">Budget Calculator</h1>
+      <p className={styles.text} data-testid="budgetText">Enter your project budget to get started.</p>
       <h2>{value}</h2>
       <div className={styles.formContainer}>
         <form onSubmit={handleSubmit} className={styles.form}>
