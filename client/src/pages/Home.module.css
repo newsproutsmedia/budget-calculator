@@ -1,13 +1,15 @@
 .home {
   width: fit-content;
   height: fit-content;
-  display: flex;
+  position: relative;
+  top: 15%;
   max-height: 100%;
   flex-direction: column;
   padding: 40px;
   z-index: 1;
   max-width: 700px;
   align-items: center;
+  text-align: center;
 }
 
 .heading {

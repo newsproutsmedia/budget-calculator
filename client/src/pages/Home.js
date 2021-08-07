@@ -15,12 +15,12 @@ function Home() {
 
   return (
     <div id="home" className={styles.home}>
-      <h1 className={styles.heading}>Budget Calculator</h1>
+      <h1 className={styles.heading} data-testid="budgetHeading">Budget Calculator</h1>
       <h2>{value}</h2>
       <div className={styles.formContainer}>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <input id="budgetInput" type="number" onChange={handleChange} className={styles.input} placeholder="Enter your budget" />
-          <input type="submit" value="Continue" className={styles.button} />
+          <input id="budgetInput" type="number" onChange={handleChange} className={styles.input} placeholder="Enter your budget" data-testid="budgetInput" />
+          <input type="submit" value="Continue" className={styles.button} data-testid="budgetSubmitBtn" />
         </form>
       </div>
     </div>
