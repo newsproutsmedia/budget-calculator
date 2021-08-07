@@ -15,9 +15,9 @@ function App() {
     <Router>
       <div id="app" className="app">
         <nav className="header">
-          <brand className="brand">
+          <div className="brand">
             <img src={logo} alt="Yardzen logo" title="Yardzen" className="logo" height="40" />
-          </brand>
+          </div>
           <menu className="menu">
             <ul className="menuList">
               <li className="menuItem"><Link to="/">Home</Link></li>
