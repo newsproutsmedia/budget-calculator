@@ -1,0 +1,48 @@
+
+.header {
+  display: flex;
+  width: 100vw;
+  height: 70px;
+  z-index: 100;
+  position: fixed;
+  top: 0px;
+  padding: 0 40px 0 40px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border-bottom: 1px solid rgb(234, 234, 234);
+}
+
+.menu {
+  align-self: center;
+  justify-self: flex-start;
+  padding-right: 80px;
+  margin-left: 0px;
+}
+
+.menuList {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: left;
+  justify-items: start;
+}
+
+.menuItem {
+  list-style-type: none;
+
+}
+
+.menuItem a {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
+  color: #000000;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.menuItem a:hover {
+  color: #444444;
+  text-decoration: underline;
+}

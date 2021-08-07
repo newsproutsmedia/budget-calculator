@@ -61,6 +61,7 @@
   background: none;
   animation-duration: 10ms;
   -webkit-tap-highlight-color: transparent;
+  margin-top: 40px;
 }
 
 .button {

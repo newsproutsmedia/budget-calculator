@@ -3,38 +3,30 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
 } from 'react-router-dom';
 import Home from './pages/Home';
-import logo from './images/yardzen-logo.png';
 import Calculate from './pages/Calculate';
 import './App.css';
+import { CalculatorProvider } from './context/CalculatorContext';
+import NavBar from './components/NavBar';
 
 function App() {
   return (
     <Router>
       <div id="app" className="app">
-        <nav className="header">
-          <div className="brand">
-            <img src={logo} alt="Yardzen logo" title="Yardzen" className="logo" height="40" />
-          </div>
-          <menu className="menu">
-            <ul className="menuList">
-              <li className="menuItem"><Link to="/">Home</Link></li>
-              <li className="menuItem"><Link to="/calculate">Calculate</Link></li>
-            </ul>
-          </menu>
-        </nav>
-        <main className="main">
-          <Switch>
-            <Route path="/calculate">
-              <Calculate />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </main>
+        <CalculatorProvider>
+          <NavBar />
+          <main className="main">
+            <Switch>
+              <Route path="/budget-calculator/app">
+                <Calculate />
+              </Route>
+              <Route path="/budget-calculator">
+                <Home />
+              </Route>
+            </Switch>
+          </main>
+        </CalculatorProvider>
       </div>
     </Router>
   );
