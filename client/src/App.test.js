@@ -4,5 +4,5 @@ import App from './App';
 
 test('renders welcome message', () => {
   render(<App />);
-  expect(screen.getByRole('heading')).toHaveTextContent('Home Page');
+  expect(screen.getByRole('heading')).toHaveTextContent('Budget Calculator');
 });
