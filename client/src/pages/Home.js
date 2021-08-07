@@ -1,24 +1,37 @@
-import React, { useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { CalculatorContext } from '../context/CalculatorContext';
 import * as styles from './Home.module.css';
 
 function Home() {
   const [calculator, setCalculator] = useContext(CalculatorContext);
-  const [value, setValue] = useState(0);
+  const [budget, setBudget] = useState(0);
   const history = useHistory();
 
-  const handleChange = (event) => {
-    setValue(event.currentTarget.value);
+  const handleBudgetChange = (event) => {
+    // get rid of decimals
+    const wholeNumber = Math.round(event.currentTarget.value);
+    setBudget(wholeNumber);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // make sure formatting matches the values being used in Firebase
+    // ideally, the multiplier should be set in a config file
+    // to accomodate different value formatting
+    const formattedValue = budget * 100;
     setCalculator((prevCalculator) => (
-      { ...prevCalculator, budget: value }
+      { ...prevCalculator, budget: formattedValue }
     ));
     history.push('/budget-calculator/app');
   };
+
+  // when page loads, set state of budget var to value of context
+  // this is so input placeholder maintains entered value
+  // on focus and blur
+  useEffect(() => {
+    setBudget(calculator.budget / 100);
+  }, []);
 
   return (
     <div id="home" className={styles.home}>
@@ -26,7 +39,20 @@ function Home() {
       <p className={styles.text} data-testid="budgetText">Enter your project budget to get started.</p>
       <div className={styles.formContainer}>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <input id="budgetInput" type="number" onChange={handleChange} className={styles.input} placeholder={calculator.budget} data-testid="budgetInput" />
+          <div className={styles.input}>
+            $
+            <input
+              id="budgetInput"
+              type="number"
+              placeholder={budget}
+              onChange={handleBudgetChange}
+              data-testid="budgetInput"
+              className={styles.inputField}
+              min={0}
+              max={10000000}
+              step={1}
+            />
+          </div>
           <input type="submit" value="Continue" className={styles.button} data-testid="budgetSubmitBtn" />
         </form>
       </div>
