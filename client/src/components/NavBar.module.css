@@ -1,17 +1,18 @@
 
 .header {
   display: flex;
-  width: 100vw;
+  max-width: 100vw;
   height: 70px;
-  z-index: 100;
-  position: fixed;
-  top: 0px;
   padding: 0 40px 0 40px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   background-color: #ffffff;
   border-bottom: 1px solid rgb(234, 234, 234);
+}
+
+.brand {
+  padding-left: 10px;
 }
 
 .menu {
@@ -31,7 +32,6 @@
 
 .menuItem {
   list-style-type: none;
-
 }
 
 .menuItem a {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { CalculatorContext } from '../context/CalculatorContext';
+import { fade } from '../utils/transitionFunctions';
 import * as styles from './Home.module.css';
 
 function Home() {
@@ -14,6 +15,10 @@ function Home() {
     setBudget(wholeNumber);
   };
 
+  const navigateToCalculatorPage = () => {
+    history.push('/budget-calculator/app');
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // make sure formatting matches the values being used in Firebase
@@ -23,10 +28,13 @@ function Home() {
     setCalculator((prevCalculator) => (
       { ...prevCalculator, budget: formattedValue }
     ));
-    history.push('/budget-calculator/app');
+
+    // call util function to fade out element
+    // and then set timeout before navigation to calculator page
+    fade.out('home').timer(300, navigateToCalculatorPage);
   };
 
-  // when page loads, set state of budget var to value of context
+  // after page loads, set state of budget var to value of context
   // this is so input placeholder maintains entered value
   // on focus and blur
   useEffect(() => {
