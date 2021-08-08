@@ -25,6 +25,9 @@
         "no-trailing-spaces": "off",
         "padded-blocks": "off",
         "jsx-one-expression-per-line": "off",
-        "no-unused-vars": "off"
+        "no-unused-vars": "off",
+        "import/prefer-default-export": "off",
+        "func-names": ["error", "as-needed"],
+        "object-shorthand": "off"
     }
 }
