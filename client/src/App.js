@@ -21,7 +21,7 @@ function App() {
               <Route path="/budget-calculator/app">
                 <Calculate />
               </Route>
-              <Route path="/budget-calculator">
+              <Route path={['/budget-calculator', '/']}>
                 <Home />
               </Route>
             </Switch>
