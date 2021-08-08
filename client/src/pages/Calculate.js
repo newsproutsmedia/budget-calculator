@@ -1,5 +1,6 @@
 import React from 'react';
 import useGetItemsByCollectionName from '../hooks/useGetItemsByCollectionName';
+import { displayCurrency } from '../utils/currencyFunctions';
 
 /*
 - In this component, I'm retrieving the array of items from Firebase
@@ -30,11 +31,11 @@ function Calculate() {
                 </li>
                 <li>
                   Low Price:
-                  {item.value.lowPrice}
+                  {displayCurrency(item.value.lowPrice)}
                 </li>
                 <li>
                   High Price:
-                  {item.value.highPrice}
+                  {displayCurrency(item.value.highPrice)}
                 </li>
               </ul>
             </div>
