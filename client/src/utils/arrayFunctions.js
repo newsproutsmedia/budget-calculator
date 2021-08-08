@@ -7,12 +7,8 @@
 export const removeArrayObjectById = (array, item) => {
   
   // get index of matching item by id
-  const index = array.indexOf((element) => element.id === item.id);
-  
-  // check that a matching item was found
-  // return array with item removed
-  if (index !== -1) return array.splice(index, 1);
+  const newArray = array.filter((element) => element.id !== item.id);
   
   // if no item found, return original array
-  return array;
+  return newArray;
 };
