@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { CalculatorContext } from '../context/CalculatorContext';
 import useGetItemsByCollectionName from '../hooks/useGetItemsByCollectionName';
 import { displayCurrency } from '../utils/currencyFunctions';
 import { removeArrayObjectById } from '../utils/arrayFunctions';
@@ -11,19 +12,24 @@ by type and mapped to components
 */
 
 function Calculate() {
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [calculator, setCalculator] = useContext(CalculatorContext);
   
   // retrieve the items array from Firebase
   const [items] = useGetItemsByCollectionName('items');
 
   const addItemToSelected = (item) => {
-    setSelectedItems((prevItems) => (
-      [...prevItems, item]
-    ));
+    setCalculator((prevCalculator) => {
+      const prevItems = prevCalculator.selectedItems;
+      return { ...prevCalculator, selectedItems: [...prevItems, item] };
+    });
   };
 
   const removeItemFromSelected = (item) => {
-    setSelectedItems(...removeArrayObjectById(item));
+    setCalculator((prevCalculator) => {
+      const prevItems = prevCalculator.selectedItems;
+      const newItems = removeArrayObjectById(prevItems, item);
+      return { ...prevCalculator, selectedItems: [...newItems] };
+    });
   };
 
   const handleCheckboxChange = (event) => {
