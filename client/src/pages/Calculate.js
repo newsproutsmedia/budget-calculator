@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useGetItemsByCollectionName from '../hooks/useGetItemsByCollectionName';
 import { displayCurrency } from '../utils/currencyFunctions';
+import { removeArrayObjectById } from '../utils/arrayFunctions';
 
 /*
 - In this component, I'm retrieving the array of items from Firebase
@@ -10,8 +11,28 @@ by type and mapped to components
 */
 
 function Calculate() {
+  const [selectedItems, setSelectedItems] = useState([]);
+  
   // retrieve the items array from Firebase
   const [items] = useGetItemsByCollectionName('items');
+
+  const addItemToSelected = (item) => {
+    setSelectedItems((prevItems) => (
+      [...prevItems, item]
+    ));
+  };
+
+  const removeItemFromSelected = (item) => {
+    setSelectedItems(...removeArrayObjectById(item));
+  };
+
+  const handleCheckboxChange = (event) => {
+    if (!event.currentTarget.checked) {
+      removeItemFromSelected(event.currentTarget.value);
+    }
+    addItemToSelected(event.currentTarget.value);
+  };
+
   return (
     <>
       <h1>Calculate Page</h1>
@@ -19,7 +40,10 @@ function Calculate() {
         {
           items && items.map((item) => (
             <div className="item-container">
-              <h3>{item.value.name}</h3>
+              <span>
+                <input type="checkbox" value={item} onChange={handleCheckboxChange}/>
+                {item.value.name}
+              </span>
               <ul>
                 <li>
                   ID:
