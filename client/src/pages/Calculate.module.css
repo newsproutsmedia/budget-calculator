@@ -30,7 +30,7 @@
   align-items: flex-start;
 }
 
-.itemList {
+.typeList {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

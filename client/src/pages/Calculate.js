@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { groupBy, startCase, lowerCase } from 'lodash';
 import { CalculatorContext } from '../context/CalculatorContext';
-import useGetItemsByCollectionName from '../hooks/useGetItemsByCollectionName';
-import { displayCurrency } from '../utils/currencyFunctions';
 import { removeArrayObjectById } from '../utils/arrayFunctions';
+import useGetItemsByCollectionName from '../hooks/useGetItemsByCollectionName';
+import ItemList from '../components/ItemList';
 import * as styles from './Calculate.module.css';
 /*
 - In this component, I'm retrieving the array of items from Firebase
@@ -76,28 +76,13 @@ function Calculate() {
     return calculator.items;
   };
 
-  const addItemToSelected = (item) => {
-    console.log('Adding Item To Selected: ', item);
+  // make this into a custom hook
+  const removeItemFromSelected = (value) => {
     setCalculator((prevCalculator) => {
       const prevItems = prevCalculator.selectedItems;
-      return { ...prevCalculator, selectedItems: [...prevItems, item] };
-    });
-  };
-
-  const removeItemFromSelected = (item) => {
-    setCalculator((prevCalculator) => {
-      const prevItems = prevCalculator.selectedItems;
-      const newItems = removeArrayObjectById(prevItems, item);
+      const newItems = removeArrayObjectById(prevItems, value);
       return { ...prevCalculator, selectedItems: [...newItems] };
     });
-  };
-
-  const handleCheckboxChange = (event, item) => {
-    if (!event.currentTarget.checked) {
-      removeItemFromSelected(item);
-      return;
-    }
-    addItemToSelected(item);
   };
 
   const handleUncheckSelected = (item) => {
@@ -131,16 +116,17 @@ function Calculate() {
         </div>
       </div>
       <div id="body" className={styles.body}>
-        <h1 className={styles.heading}>Calculate Page</h1>
-        <div className={styles.itemList}>
+        <div className={styles.typeList}>
           {
-            calculator.items && Object.keys(calculator.items).map((type) => {
-              const typeItems = calculator.items[type];
+            calculator.items && Object.keys(calculator.items).sort().map((type) => {
+
               const title = startCase(lowerCase(type));
-              console.log('Rendering Item: Index: ', typeItems);
 
               return (
-                <h2>{title}</h2>
+                <div className={styles.type}>
+                  <h2>{title}</h2>
+                  <ItemList type={type} />
+                </div>
               );
             })
           }
