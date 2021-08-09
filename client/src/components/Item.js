@@ -26,6 +26,8 @@ function Item({ item }) {
   };
 
   const handleCheckboxChange = (event, value) => {
+    const labelId = `${value.id}-label`;
+    document.getElementById(labelId).classList.toggle('checked');
     if (!event.currentTarget.checked) {
       removeItemFromSelected(value);
       return;
@@ -33,26 +35,33 @@ function Item({ item }) {
     addItemToSelected(value);
   };
 
+  // implement radio button & label
+  // add Form element to Type component
+  // make sure to add name property to input element with value of item.value.type
+  // on rollover, highlight background color
+
   return (
     <div className={styles.item}>
       <input id={item.id} type="checkbox" value={item.id} onChange={(event) => handleCheckboxChange(event, item)} />
-      <div className={styles.itemName}>
-        {item.value.name}
-      </div>
-      <div className={styles.itemDetails}>
-        <div className={styles.itemIdTitle}>
-          Price Range:
-        </div>
-        <div className={styles.itemPrice}>
-          { `${displayCurrency(item.value.lowPrice)} - ${displayCurrency(item.value.highPrice)}` }
-        </div>
-        <div className={styles.itemIdTitle}>
-          Item ID:
-        </div>
-        <div className={styles.itemId}>
-          {item.id}
-        </div>
-      </div>
+      <label id={`${item.id}-label`} htmlFor={item.id} className={styles.label}>
+        <ul className={styles.itemDetails}>
+          <li className={styles.itemName}>
+            {item.value.name}
+          </li>
+          <li className={styles.itemIdTitle}>
+            Price Range:
+          </li>
+          <li className={styles.itemPrice}>
+            { `${displayCurrency(item.value.lowPrice)} - ${displayCurrency(item.value.highPrice)}` }
+          </li>
+          <li className={styles.itemIdTitle}>
+            Item ID:
+          </li>
+          <li className={styles.itemId}>
+            {item.id}
+          </li>
+        </ul>
+      </label>
     </div>
   );
 
