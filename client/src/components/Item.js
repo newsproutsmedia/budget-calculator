@@ -42,7 +42,7 @@ function Item({ item }) {
       <div>
         <ul className={styles.itemDetails}>
           <li className={styles.itemPrice}>
-            { `${displayCurrency(item.value.lowPrice)}-${displayCurrency(item.value.highPrice)}` }
+            { `${displayCurrency(item.value.lowPrice)} - ${displayCurrency(item.value.highPrice)}` }
           </li>
           <li className={styles.itemId}>
             ID:
