@@ -173,13 +173,13 @@ function Calculate() {
     let budgetStatus;
     const budgetNum = Number(calculator.budget);
     if (budgetNum > Number(calculator.highTotal)) {
-      budgetStatus = budgetNotification.under;
+      budgetStatus = 'under';
     }
     if (budgetNum < Number(calculator.lowTotal)) {
-      budgetStatus = budgetNotification.over;
+      budgetStatus = 'over';
     }
     if (Number(calculator.lowTotal) < budgetNum && budgetNum < Number(calculator.highTotal)) {
-      budgetStatus = budgetNotification.inRange;
+      budgetStatus = 'inRange';
     }
     setCalculator((prevCalculator) => (
       {
@@ -221,7 +221,7 @@ function Calculate() {
                 {`${displayCurrency(calculator.lowTotal)} - ${displayCurrency(calculator.highTotal)}`}
               </div>
               <div className={`${styles.notification} ${styles[calculator.status]}`}>
-                { calculator.status }
+                { budgetNotification[calculator.status] }
               </div>
             </div>
             )
