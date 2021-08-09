@@ -7,10 +7,12 @@ function CalculatorProvider({ children }) {
 
   const [calculator, setCalculator] = useState(
     { 
-      budget: 0, 
+      budget: 0,
+      items: {}, 
       selectedItems: [], 
       lowTotal: 0, 
       highTotal: 0,
+      isOver: false,
     },
   );
   return (
