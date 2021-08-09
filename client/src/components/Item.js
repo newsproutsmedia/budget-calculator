@@ -1,5 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { update } from 'lodash';
 import { CalculatorContext } from '../context/CalculatorContext';
 import { displayCurrency } from '../utils/currencyFunctions';
 import { removeArrayObjectById } from '../utils/arrayFunctions';
@@ -7,7 +8,27 @@ import * as styles from './Item.module.css';
 
 function Item({ item }) {
   const [calculator, setCalculator] = useContext(CalculatorContext);
-  const [isChecked, setIsChecked] = useState(false);
+
+  const selectItemInContext = (value, isSelected) => {
+    console.log('selectItem: ', value);
+    const { type } = value.value;
+    const prevItems = calculator.items;
+    const prevType = prevItems[type];
+    const index = prevType.findIndex((node) => node.id === value.id);
+    prevType[index].isSelected = isSelected;
+    setCalculator((prevCalculator) => (
+      {
+        ...prevCalculator,
+        items: {
+          ...prevItems,
+          [type]: [
+            ...prevType,
+          ],
+        },
+      }
+    ));
+    console.log('selectItem: new Calc Items: ', calculator.items);
+  };
 
   const addItemToSelected = (value) => {
     console.log('Adding Item To Selected: ', value);
@@ -25,20 +46,27 @@ function Item({ item }) {
     });
   };
 
+  const clearAllOfTypeFromSelected = (type) => {
+    type.forEach((node) => {
+      document.getElementById(node.id).checked = false;
+      selectItemInContext(node, false);
+      removeItemFromSelected(node);
+    });
+  };
+
   const handleCheckboxChange = (event, value) => {
     const labelId = `${value.id}-label`;
     document.getElementById(labelId).classList.toggle('checked');
     if (!event.currentTarget.checked) {
+      selectItemInContext(value, false);
       removeItemFromSelected(value);
       return;
     }
+    clearAllOfTypeFromSelected(calculator.items[item.value.type]);
+    document.getElementById(value.id).checked = true;
+    selectItemInContext(value, true);
     addItemToSelected(value);
   };
-
-  // implement radio button & label
-  // add Form element to Type component
-  // make sure to add name property to input element with value of item.value.type
-  // on rollover, highlight background color
 
   return (
     <div className={styles.item}>
