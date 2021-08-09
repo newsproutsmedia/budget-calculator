@@ -32,3 +32,19 @@ export const displayCurrency = (value) => {
   };
   return formatValue(budget);
 };
+
+/**
+ * @desc get total of all values in array
+ * @param {object} items 
+ * @oparam {string} propertyName
+ * @returns {string} total
+ */
+export const totalAllItems = (items, propertyName) => {
+  let total = 0;
+
+  items.forEach((item) => {
+    total += Number(item.value[propertyName]);
+  });
+
+  return total;
+};

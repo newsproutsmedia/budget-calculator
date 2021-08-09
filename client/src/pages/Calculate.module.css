@@ -17,7 +17,7 @@
   height: 100%;
   border-right: 1px solid #fdfdfd;
   background-color: #d3d3d3;
-  padding: 10px;
+  padding: 33px 40px 10px 20px;
 }
 
 .body {
@@ -28,6 +28,8 @@
   align-content: flex-start;
   justify-content: flex-start;
   align-items: flex-start;
+  height: 100%;
+  overflow: auto;
 }
 
 .typeList {
@@ -41,6 +43,10 @@
   align-items: flex-start;
 }
 
+.budget {
+  margin-bottom: 40px;
+}
+
 .selectedItem {
   display: flex;
   flex-direction: row;
@@ -51,12 +57,122 @@
 }
 
 .removeButton {
-  background-color: red;
+  background-color: rgba(100,100,100,0.5);
   min-height: 100%;
   border: none;
   color: white;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.removeButton:hover {
+  background-color: rgba(179, 19, 19, 0.5);
+  cursor: pointer;
 }
 
 .removeButton:hover {
   cursor: pointer;
+}
+
+.budgetHeading {
+  font-family: 'Domaine Display Narrow Regular', serif;
+  font-size: 1.6rem;
+  font-weight: 200;
+  width: 100%;
+  border-bottom: 1px solid rgba(0,0,0,0.3);
+  padding-bottom: 10px;
+  color: rgba(0,0,0,0.87);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.budgetAmount {
+  font-family: 'Domaine Display Narrow Regular', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.rangeText {
+  font-family: "Apercu", "Inter", "Helvetica", "Arial", sans-serif;
+  color: #4c4c4c;
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: 1rem;
+  padding: 0px;
+  margin: 10px 0 0 0;
+}
+
+.rangeValues {
+  font-family: 'Domaine Display Narrow Regular', serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-top: 10px;
+}
+
+.notification {
+  font-family: "Apercu", "Inter", "Helvetica", "Arial", sans-serif;
+  color: #4c4c4c;
+  font-weight: 400;
+  font-size: 0.7rem;
+  padding: 0px;
+  margin: 10px 0 0 0;
+}
+
+.under {
+  color:rgba(78, 179, 19, 0.5);
+}
+
+.inRange {
+  color: rgba(100,100,100,0.8);
+}
+
+.over {
+  color:rgba(179, 19, 19, 0.5);
+  font-size: 0.9rem;
+}
+
+.selectedList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.selectedItem {
+  padding: 4px 0 20px 0;
+}
+
+.selectedItem:nth-child(1) {
+  padding-top: 0px;
+}
+
+.selectedItem:nth-child(1n) {
+  border-bottom: 1px dotted #4c4c4c;
+}
+
+.selectedItem:last-child {
+  border-bottom: none;
+}
+
+.itemName {
+  font-family: "Roboto Mono", monospace;
+  font-size: 1rem;
+  color: rgba(0,0,0,0.87);
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+.itemPriceRange {
+  font-family: "Apercu", "Inter", "Helvetica", "Arial", sans-serif;
+  color: #4c4c4c;
+  font-weight: 400;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.itemId {
+  font-family: "Apercu", "Inter", "Helvetica", "Arial", sans-serif;
+  color: #4c4c4c;
+  font-weight: 400;
+  font-size: 0.7rem;
 }

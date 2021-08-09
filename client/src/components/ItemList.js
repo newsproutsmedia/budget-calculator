@@ -5,12 +5,9 @@ import Item from './Item';
 import * as styles from './ItemList.module.css';
 
 function ItemList({ type }) {
-
   const [calculator, setCalculator] = useContext(CalculatorContext);
 
   const typeItems = calculator.items[type];
-  
-  console.log('ItemList: Items: ', typeItems);
 
   return (
     <div className={styles.itemList}>
