@@ -10,7 +10,7 @@ function TypeList() {
     <div className={styles.typeList}>
       {
         calculator.items && Object.keys(calculator.items).sort().map((type) => (
-          <Type type={type} />
+          <Type key={`${type}-key`} type={type} />
         ))
       }
     </div>

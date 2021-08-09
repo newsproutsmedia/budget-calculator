@@ -13,7 +13,7 @@ function ItemList({ type }) {
     <div className={styles.itemList}>
       {
         calculator.items && typeItems.map((item) => (
-          <Item item={item} />
+          <Item key={`${item.id}-key`} item={item} />
         ))
       }
     </div>

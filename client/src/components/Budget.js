@@ -56,7 +56,6 @@ function Budget() {
    * @returns status from context
    */
   const checkBudgetStatus = () => {
-    console.log('Checking budget status');
     let budgetStatus;
     const budgetNum = Number(calculator.budget);
     if (budgetNum > Number(calculator.highTotal)) {
@@ -83,7 +82,6 @@ function Budget() {
     const totals = getPriceRange();
     addTotalToContext(totals.low, 'lowTotal');
     addTotalToContext(totals.high, 'highTotal');
-    console.log('Getting Totals', calculator);
   }, [calculator.selectedItems]);
 
   // execute when highTotal is updated in context

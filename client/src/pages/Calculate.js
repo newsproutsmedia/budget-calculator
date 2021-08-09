@@ -26,7 +26,6 @@ function Calculate() {
         isSelected: false,
       }
     ));
-    console.log('addDisabledProperty: ', { items, newItems });
     return newItems;
   };
 
@@ -37,7 +36,6 @@ function Calculate() {
    */
   const groupItemsByType = async (items) => {
     const groupedItems = groupBy(items, (item) => item.value.type);
-    console.log('groupItemsByType: ', { items, groupedItems });
     return groupedItems;
   };
 
@@ -50,7 +48,6 @@ function Calculate() {
     setCalculator((prevCalculator) => (
       { ...prevCalculator, items }
     ));
-    console.log('addItemsToContext: ', { items, contextItems: calculator.items });
     return calculator.items;
   };
   
