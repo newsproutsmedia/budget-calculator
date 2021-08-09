@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { update } from 'lodash';
 import { CalculatorContext } from '../context/CalculatorContext';
 import { displayCurrency } from '../utils/currencyFunctions';
 import { removeArrayObjectById } from '../utils/arrayFunctions';
@@ -38,6 +37,10 @@ function Item({ item }) {
     console.log('selectItem: new Calc Items: ', calculator.items);
   };
 
+  /**
+   * @desc adds item to selectedItems in context
+   * @param {object*} value item object
+   */
   const addItemToSelected = (value) => {
     console.log('Adding Item To Selected: ', value);
     setCalculator((prevCalculator) => {
@@ -61,26 +64,39 @@ function Item({ item }) {
     });
   };
 
+  /**
+   * @desc remove all items of specific type from selectedItems in context
+   * @param {string} type
+   * @returns {array} updated selectedItems array from context
+   */
   const clearAllOfTypeFromSelected = (type) => {
     type.forEach((node) => {
       document.getElementById(node.id).checked = false;
       selectItemInContext(node, false);
       removeItemFromSelected(node);
     });
+    return calculator.selectedItems;
   };
 
+  /**
+   * @desc event handler for item onChange
+   * @param {object} event 
+   * @param {object} value item object
+   * @returns {array} selectedItems from context
+   */
   const handleCheckboxChange = (event, value) => {
     const labelId = `${value.id}-label`;
     document.getElementById(labelId).classList.toggle('checked');
     if (!event.currentTarget.checked) {
       selectItemInContext(value, false);
       removeItemFromSelected(value);
-      return;
+      return calculator.selectedItems;
     }
     clearAllOfTypeFromSelected(calculator.items[item.value.type]);
     document.getElementById(value.id).checked = true;
     selectItemInContext(value, true);
     addItemToSelected(value);
+    return calculator.selectedItems;
   };
 
   return (

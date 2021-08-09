@@ -9,16 +9,30 @@ function Home() {
   const [budget, setBudget] = useState(0);
   const history = useHistory();
 
+  /**
+   * @desc event handler for input change
+   * @param {object*} event
+   * @returns budget from context
+   */
   const handleBudgetChange = (event) => {
     // get rid of decimals
     const wholeNumber = Math.round(event.currentTarget.value);
     setBudget(wholeNumber);
+    return calculator.budget;
   };
 
+  /**
+   * @desc triggers react router to load Calculate component
+   */
   const navigateToCalculatorPage = () => {
     history.push('/budget-calculator/app');
   };
 
+  /**
+   * @desc event handler for form submission
+   * @param {object} event
+   * @returns {string} updated budget from context
+   */
   const handleSubmit = (event) => {
     event.preventDefault();
     // make sure formatting matches the values being used in Firebase
@@ -32,6 +46,7 @@ function Home() {
     // call util function to fade out element
     // and then set timeout before navigation to calculator page
     fade.out('home').timer(300, navigateToCalculatorPage);
+    return calculator.budget;
   };
 
   // after page loads, set state of budget var to value of context

@@ -35,6 +35,12 @@ function Budget() {
     return totals;
   };
 
+  /**
+   * @desc add aggregate toal to context
+   * @param {number} total 
+   * @param {string} propertyName 
+   * @returns total from context
+   */
   const addTotalToContext = (total, propertyName) => {
     setCalculator((prevCalculator) => (
       {
@@ -45,6 +51,10 @@ function Budget() {
     return calculator[propertyName];
   };
 
+  /**
+   * @desc checks whether budget is over, under, or in range
+   * @returns status from context
+   */
   const checkBudgetStatus = () => {
     console.log('Checking budget status');
     let budgetStatus;
@@ -64,8 +74,11 @@ function Budget() {
         status: budgetStatus,
       }
     ));
+    return calculator.status;
   };
 
+  // execute when refresh occurs from selectedItems
+  // context update
   useEffect(() => {
     const totals = getPriceRange();
     addTotalToContext(totals.low, 'lowTotal');
@@ -73,6 +86,8 @@ function Budget() {
     console.log('Getting Totals', calculator);
   }, [calculator.selectedItems]);
 
+  // execute when highTotal is updated in context
+  // this is to fix one-click lag in status updating
   useEffect(() => {
     checkBudgetStatus();
     forceUpdate();

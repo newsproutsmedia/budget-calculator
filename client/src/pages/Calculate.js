@@ -2,10 +2,10 @@ import React, { useEffect, useContext } from 'react';
 import { groupBy } from 'lodash';
 import { CalculatorContext } from '../context/CalculatorContext';
 import useGetItemsByCollectionName from '../hooks/useGetItemsByCollectionName';
-import Type from '../components/Type';
 import Budget from '../components/Budget';
 import * as styles from './Calculate.module.css';
 import SelectedItems from '../components/SelectedItems';
+import TypeList from '../components/TypeList';
 
 /**
  * @desc retrieve the array of items from Firebase and map to components
@@ -83,13 +83,7 @@ function Calculate() {
         <SelectedItems />
       </div>
       <div id="body" className={styles.body}>
-        <div className={styles.typeList}>
-          {
-            calculator.items && Object.keys(calculator.items).sort().map((type) => (
-              <Type type={type} />
-            ))
-          }
-        </div>
+        <TypeList />
       </div>
     </div>
   );
