@@ -1,0 +1,27 @@
+.itemName {
+  font-family: "Roboto Mono", monospace;
+  font-size: 1.3rem;
+  line-height: 2rem;
+  color: #4c4c4c;
+  font-weight: 400;
+}
+
+.itemDetails {
+  list-style-type: none;
+  padding-left: 0px;
+  font-family: "Apercu", "Inter", "Helvetica", "Arial", sans-serif;
+  line-height: 2rem;
+  color: #4c4c4c;
+  font-weight: 400;
+  font-size: 0.9rem;
+  padding: 0px;
+  margin: 0px;
+}
+
+.itemPrice {
+
+}
+
+.itemId {
+  font-size: 0.7rem;
+}
