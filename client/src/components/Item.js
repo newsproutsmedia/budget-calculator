@@ -35,20 +35,23 @@ function Item({ item }) {
 
   return (
     <div className={styles.item}>
+      <input id={item.id} type="checkbox" value={item.id} onChange={(event) => handleCheckboxChange(event, item)} />
       <div className={styles.itemName}>
-        <input id={item.id} type="checkbox" value={item.id} onChange={(event) => handleCheckboxChange(event, item)} />
         {item.value.name}
       </div>
-      <div>
-        <ul className={styles.itemDetails}>
-          <li className={styles.itemPrice}>
-            { `${displayCurrency(item.value.lowPrice)} - ${displayCurrency(item.value.highPrice)}` }
-          </li>
-          <li className={styles.itemId}>
-            ID:
-            {item.id}
-          </li>
-        </ul>
+      <div className={styles.itemDetails}>
+        <div className={styles.itemIdTitle}>
+          Price Range:
+        </div>
+        <div className={styles.itemPrice}>
+          { `${displayCurrency(item.value.lowPrice)} - ${displayCurrency(item.value.highPrice)}` }
+        </div>
+        <div className={styles.itemIdTitle}>
+          Item ID:
+        </div>
+        <div className={styles.itemId}>
+          {item.id}
+        </div>
       </div>
     </div>
   );

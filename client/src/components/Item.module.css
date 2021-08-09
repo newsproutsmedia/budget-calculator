@@ -4,22 +4,29 @@
   line-height: 2rem;
   color: #4c4c4c;
   font-weight: 400;
+  width: 100%;
+  padding-bottom: 5px;
+  border-bottom: 1px dotted rgba(0,0,0,0.3);
 }
 
 .itemDetails {
   list-style-type: none;
   padding-left: 0px;
   font-family: "Apercu", "Inter", "Helvetica", "Arial", sans-serif;
-  line-height: 2rem;
   color: #4c4c4c;
   font-weight: 400;
   font-size: 0.9rem;
   padding: 0px;
-  margin: 0px;
+  margin: 10px 0 0 0;
 }
 
 .itemPrice {
+  margin: 0 0 10px 0;
+}
 
+.itemIdTitle {
+  font-size: 0.7rem;
+  font-weight: 700;
 }
 
 .itemId {
