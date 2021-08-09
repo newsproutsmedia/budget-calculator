@@ -1,9 +1,9 @@
 import React, { useEffect, useContext } from 'react';
-import { groupBy, startCase, lowerCase } from 'lodash';
+import { groupBy } from 'lodash';
 import { CalculatorContext } from '../context/CalculatorContext';
 import { removeArrayObjectById } from '../utils/arrayFunctions';
 import useGetItemsByCollectionName from '../hooks/useGetItemsByCollectionName';
-import ItemList from '../components/ItemList';
+import Type from '../components/Type';
 import * as styles from './Calculate.module.css';
 /*
 - In this component, I'm retrieving the array of items from Firebase
@@ -19,15 +19,15 @@ function Calculate() {
   const [collectionItems] = useGetItemsByCollectionName('items');
 
   /**
-   * @desc add isDisabled property to each array object
+   * @desc add isSelected property to each array object
    * @param {array} items 
    * @returns {array} updated array
    */
-  const addDisabledProperty = async (items) => {
+  const addSelectedProperty = async (items) => {
     const newItems = items.map((item) => (
       {
         ...item,
-        isDisabled: false,
+        isSelected: false,
       }
     ));
     console.log('addDisabledProperty: ', { items, newItems });
@@ -65,7 +65,7 @@ function Calculate() {
   const loadItems = async () => {
     try {
       // add isDisabled property to each item
-      const itemsWithDisabledProperty = await addDisabledProperty(collectionItems);
+      const itemsWithDisabledProperty = await addSelectedProperty(collectionItems);
       // group items by type
       const groupedItems = await groupItemsByType(itemsWithDisabledProperty);
       // add items to context
@@ -118,17 +118,9 @@ function Calculate() {
       <div id="body" className={styles.body}>
         <div className={styles.typeList}>
           {
-            calculator.items && Object.keys(calculator.items).sort().map((type) => {
-
-              const title = startCase(lowerCase(type));
-
-              return (
-                <div className={styles.type}>
-                  <h2>{title}</h2>
-                  <ItemList type={type} />
-                </div>
-              );
-            })
+            calculator.items && Object.keys(calculator.items).sort().map((type) => (
+              <Type type={type} />
+            ))
           }
         </div>
       </div>
