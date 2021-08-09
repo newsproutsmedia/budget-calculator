@@ -1,18 +1,11 @@
 import React, { useEffect, useContext } from 'react';
-import { groupBy, startCase, lowerCase } from 'lodash';
+import { groupBy } from 'lodash';
 import { CalculatorContext } from '../context/CalculatorContext';
-import { removeArrayObjectById } from '../utils/arrayFunctions';
-import { displayCurrency, totalAllItems } from '../utils/currencyFunctions';
-import useForceUpdate from '../hooks/useForceUpdate';
 import useGetItemsByCollectionName from '../hooks/useGetItemsByCollectionName';
 import Type from '../components/Type';
+import Budget from '../components/Budget';
 import * as styles from './Calculate.module.css';
-
-const budgetNotification = {
-  under: 'You are under budget',
-  inRange: 'Your budget is within the range of selected items',
-  over: 'You are over budget',
-};
+import SelectedItems from '../components/SelectedItems';
 
 /**
  * @desc retrieve the array of items from Firebase and map to components
@@ -79,184 +72,15 @@ function Calculate() {
     return calculator.items;
   };
 
-  // duplicated in Item
-  // make this into a custom hook
-  /**
-   * @desc removes item from selectedItems property of context
-   * @param {object*} value
-   * @returns {object} updated selectedItems
-   */
-  const removeItemFromSelected = (value) => {
-    setCalculator((prevCalculator) => {
-      const prevItems = prevCalculator.selectedItems;
-      const newItems = removeArrayObjectById(prevItems, value);
-      return { ...prevCalculator, selectedItems: [...newItems] };
-    });
-    return calculator.selectedItems;
-  };
-
-  // duplicated in Item
-  // make this into a custom hook
-  /**
-   * @desc updates value of isSelected property in context item
-   * @param {object} value 
-   * @param {boolean} isSelected 
-   * @returns {object} updated items
-   */
-  const selectItemInContext = (value, isSelected) => {
-    console.log('selectItem: ', value);
-    const { type } = value.value;
-    const prevItems = calculator.items;
-    const prevType = prevItems[type];
-    const index = prevType.findIndex((node) => node.id === value.id);
-    prevType[index].isSelected = isSelected;
-    setCalculator((prevCalculator) => (
-      {
-        ...prevCalculator,
-        items: {
-          ...prevItems,
-          [type]: [
-            ...prevType,
-          ],
-        },
-      }
-    ));
-    return calculator.items;
-  };
-
-  /**
-   * @desc handles button click event for removing item
-   * @param {object} item 
-   */
-  const handleUncheckSelected = (item) => {
-    document.getElementById(item.id).checked = false;
-    selectItemInContext(item, false);
-    removeItemFromSelected(item);
-  };
-
   useEffect(() => {
     loadItems();
   }, [collectionItems]);
 
-  /**
-   * @desc get price range totals of selected items
-   * @returns {object} low and high totals
-   */
-  const getPriceRange = () => {
-    let totals = {
-      low: 0,
-      high: 0,
-    };
-
-    if (calculator.selectedItems.length > 0) {
-      totals = {
-        low: totalAllItems(calculator.selectedItems, 'lowPrice'),
-        high: totalAllItems(calculator.selectedItems, 'highPrice'),
-      };
-    }
-
-    return totals;
-  };
-
-  const addTotalToContext = (total, propertyName) => {
-    setCalculator((prevCalculator) => (
-      {
-        ...prevCalculator,
-        [propertyName]: total,
-      }
-    ));
-    return calculator[propertyName];
-  };
-
-  const checkBudgetStatus = () => {
-    console.log('Checking budget status');
-    let budgetStatus;
-    const budgetNum = Number(calculator.budget);
-    if (budgetNum > Number(calculator.highTotal)) {
-      budgetStatus = 'under';
-    }
-    if (budgetNum < Number(calculator.lowTotal)) {
-      budgetStatus = 'over';
-    }
-    if (Number(calculator.lowTotal) < budgetNum && budgetNum < Number(calculator.highTotal)) {
-      budgetStatus = 'inRange';
-    }
-    setCalculator((prevCalculator) => (
-      {
-        ...prevCalculator,
-        status: budgetStatus,
-      }
-    ));
-  };
-
-  const forceUpdate = useForceUpdate();
-
-  useEffect(() => {
-    const totals = getPriceRange();
-    addTotalToContext(totals.low, 'lowTotal');
-    addTotalToContext(totals.high, 'highTotal');
-    console.log('Getting Totals', calculator);
-  }, [calculator.selectedItems]);
-
-  useEffect(() => {
-    checkBudgetStatus();
-    forceUpdate();
-  }, [calculator.highTotal]);
-
   return (
     <div id="calculator" className={styles.calculator}>
       <div id="leftNav" className={styles.leftNav}>
-        <div id="budget" className={styles.budget}>
-          <h2 className={styles.budgetHeading}>
-            Your Budget:
-            <span className={styles.budgetAmount}>{ displayCurrency(calculator.budget) }</span>
-          </h2>
-          {
-            calculator.selectedItems.length > 0 && (
-            <div id="range">
-              <div className={styles.rangeText}>
-                Price Range Of Selected Items:
-              </div>
-              <div className={styles.rangeValues}>
-                {`${displayCurrency(calculator.lowTotal)} - ${displayCurrency(calculator.highTotal)}`}
-              </div>
-              <div className={`${styles.notification} ${styles[calculator.status]}`}>
-                { budgetNotification[calculator.status] }
-              </div>
-            </div>
-            )
-          }
-          {
-            calculator.selectedItems.length < 1 && (
-              <div className={styles.rangeText}>
-                Begin your project estimate by selecting items from the list.
-              </div>
-            )
-          }
-        </div>
-        {
-          calculator.selectedItems.length > 0 && (
-          <div id="selectedItems" className={styles.selected}>
-            <h2 className={styles.budgetHeading}>
-              Selected Items:
-            </h2>
-            <div className={styles.selectedList}>
-              {
-                calculator.selectedItems && calculator.selectedItems.map((item) => (
-                  <div className={styles.selectedItem}>
-                    <div>
-                      <div className={styles.itemName}>{`${startCase(lowerCase(item.value.type))}: ${item.value.name}`}</div>
-                      <div className={styles.itemPriceRange}>{`Price Range: ${displayCurrency(item.value.lowPrice)} - ${displayCurrency(item.value.highPrice)}`}</div>
-                      <div className={styles.itemId}>{`Item ID: ${item.id}`}</div>
-                    </div>
-                    <button type="button" onClick={() => handleUncheckSelected(item)} className={styles.removeButton}>X</button> 
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-          )
-        }
+        <Budget />
+        <SelectedItems />
       </div>
       <div id="body" className={styles.body}>
         <div className={styles.typeList}>
