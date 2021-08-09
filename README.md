@@ -1,6 +1,17 @@
 # Budget Calculator
 Setting realistic expectations around budget is an important part of any home improvement design process. This budget calculator can help clients understand the cost of building and installing individual elements in their designs.
 
+## Environment Vars For Firebase Connectivity
+Before deploying, the following environment variables will need to be set up on the host: 
+
+REACT_APP_FIREBASE_API_KEY
+REACT_APP_FIREBASE_AUTH_DOMAIN
+REACT_APP_FIREBASE_DATABASE_URL
+REACT_APP_FIREBASE_PROJECT_ID
+REACT_APP_FIREBASE_STORAGE_BUCKET
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID
+REACT_APP_FIREBASE_APP_ID
+
 ## Built On React App With Express Backend Starter
 A starter template for creating React applications with a Node/Express backend. Includes frontend and backend tests, as well as Winston/Morgan logging of API routes and errors, and CircleCI config, and Heroku deployment. Client built with create-react-app.
 
