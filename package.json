@@ -1,7 +1,7 @@
 {
-    "name": "react-app-express",
+    "name": "budget-calculator",
     "version": "1.0.0",
-    "description": "Template for React app with Express backend",
+    "description": "Yard project budget calculator with Firebase",
     "main": "server/server.js",
     "engines": {
         "node": "16.2.x"
@@ -24,7 +24,8 @@
         "node",
         "express",
         "react",
-        "react-with-express"
+        "budget-calculator",
+        "firebase"
     ],
     "author": "NB Walters",
     "license": "ISC"
