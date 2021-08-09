@@ -2,8 +2,8 @@ import React, { useEffect, useContext } from 'react';
 import { groupBy, startCase, lowerCase } from 'lodash';
 import { CalculatorContext } from '../context/CalculatorContext';
 import { removeArrayObjectById } from '../utils/arrayFunctions';
-
 import { displayCurrency, totalAllItems } from '../utils/currencyFunctions';
+import useForceUpdate from '../hooks/useForceUpdate';
 import useGetItemsByCollectionName from '../hooks/useGetItemsByCollectionName';
 import Type from '../components/Type';
 import * as styles from './Calculate.module.css';
@@ -136,8 +136,6 @@ function Calculate() {
 
   useEffect(() => {
     loadItems();
-    console.log('items', collectionItems);
-    console.log('calculator', calculator);
   }, [collectionItems]);
 
   /**
@@ -161,13 +159,13 @@ function Calculate() {
   };
 
   const addTotalToContext = (total, propertyName) => {
-    console.log('Adding total to context', propertyName);
     setCalculator((prevCalculator) => (
       {
         ...prevCalculator,
         [propertyName]: total,
       }
     ));
+    return calculator[propertyName];
   };
 
   const checkBudgetStatus = () => {
@@ -175,13 +173,13 @@ function Calculate() {
     let budgetStatus;
     const budgetNum = Number(calculator.budget);
     if (budgetNum > Number(calculator.highTotal)) {
-      budgetStatus = 'under';
-    }
-    if (Number(calculator.lowTotal) < budgetNum < Number(calculator.highTotal)) {
-      budgetStatus = 'inRange';
+      budgetStatus = budgetNotification.under;
     }
     if (budgetNum < Number(calculator.lowTotal)) {
-      budgetStatus = 'over';
+      budgetStatus = budgetNotification.over;
+    }
+    if (Number(calculator.lowTotal) < budgetNum && budgetNum < Number(calculator.highTotal)) {
+      budgetStatus = budgetNotification.inRange;
     }
     setCalculator((prevCalculator) => (
       {
@@ -191,12 +189,19 @@ function Calculate() {
     ));
   };
 
+  const forceUpdate = useForceUpdate();
+
   useEffect(() => {
     const totals = getPriceRange();
     addTotalToContext(totals.low, 'lowTotal');
     addTotalToContext(totals.high, 'highTotal');
-    checkBudgetStatus();
+    console.log('Getting Totals', calculator);
   }, [calculator.selectedItems]);
+
+  useEffect(() => {
+    checkBudgetStatus();
+    forceUpdate();
+  }, [calculator.highTotal]);
 
   return (
     <div id="calculator" className={styles.calculator}>
@@ -216,7 +221,7 @@ function Calculate() {
                 {`${displayCurrency(calculator.lowTotal)} - ${displayCurrency(calculator.highTotal)}`}
               </div>
               <div className={`${styles.notification} ${styles[calculator.status]}`}>
-                { budgetNotification[calculator.status] }
+                { calculator.status }
               </div>
             </div>
             )
