@@ -33,7 +33,6 @@ function SelectedItems() {
    * @returns {object} updated items
    */
   const selectItemInContext = (value, isSelected) => {
-    console.log('selectItem: ', value);
     const { type } = value.value;
     const prevItems = calculator.items;
     const prevType = prevItems[type];

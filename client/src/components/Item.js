@@ -17,7 +17,6 @@ function Item({ item }) {
    * @returns {object} updated items
    */
   const selectItemInContext = (value, isSelected) => {
-    console.log('selectItem: ', value);
     const { type } = value.value;
     const prevItems = calculator.items;
     const prevType = prevItems[type];
@@ -34,7 +33,6 @@ function Item({ item }) {
         },
       }
     ));
-    console.log('selectItem: new Calc Items: ', calculator.items);
   };
 
   /**
@@ -42,7 +40,6 @@ function Item({ item }) {
    * @param {object*} value item object
    */
   const addItemToSelected = (value) => {
-    console.log('Adding Item To Selected: ', value);
     setCalculator((prevCalculator) => {
       const prevItems = prevCalculator.selectedItems;
       return { ...prevCalculator, selectedItems: [...prevItems, value] };
