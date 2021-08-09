@@ -9,6 +9,14 @@ import * as styles from './Item.module.css';
 function Item({ item }) {
   const [calculator, setCalculator] = useContext(CalculatorContext);
 
+  // duplicated in Calculate
+  // make this into a custom hook
+  /**
+   * @desc updates value of isSelected property in context item
+   * @param {object} value 
+   * @param {boolean} isSelected 
+   * @returns {object} updated items
+   */
   const selectItemInContext = (value, isSelected) => {
     console.log('selectItem: ', value);
     const { type } = value.value;
@@ -38,6 +46,13 @@ function Item({ item }) {
     });
   };
 
+  // duplicated in Calculate
+  // make this into a custom hook
+  /**
+   * @desc removes item from selectedItems property of context
+   * @param {object*} value
+   * @returns {object} updated selectedItems
+   */
   const removeItemFromSelected = (value) => {
     setCalculator((prevCalculator) => {
       const prevItems = prevCalculator.selectedItems;

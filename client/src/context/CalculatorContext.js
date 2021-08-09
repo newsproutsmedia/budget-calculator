@@ -12,7 +12,7 @@ function CalculatorProvider({ children }) {
       selectedItems: [], 
       lowTotal: 0, 
       highTotal: 0,
-      isOver: false,
+      status: 'under',
     },
   );
   return (
